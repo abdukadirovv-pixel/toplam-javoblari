@@ -1,6 +1,6 @@
 import os
 import re
-
+import asyncio  # add this to the imports at the top
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
@@ -50,6 +50,7 @@ async def handle(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 
 
 def main():
+    asyncio.set_event_loop(asyncio.new_event_loop())  # fixes the Python 3.14 error
     app = ApplicationBuilder().token(os.getenv("BOT_TOKEN")).build()
     app.add_handler(CommandHandler(["start", "help"], start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle))
