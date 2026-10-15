@@ -2,4 +2,4 @@
 __pycache__/
 *.pyc
 .venv/
-"reports.db"
+reports.db
